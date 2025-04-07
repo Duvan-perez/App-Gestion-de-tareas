@@ -84,7 +84,7 @@ fun HomeScreen() {
                     .padding(paddingValues),
                 color = MaterialTheme.colorScheme.background
             ) {
-                ContentNavigation(selectedOption = selectedOption)
+                ContentNavigation()
             }
         }
     }
