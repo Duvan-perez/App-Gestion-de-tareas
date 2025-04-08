@@ -1,7 +1,13 @@
 package com.example.proyectopoli.screens
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DrawerValue
@@ -24,6 +30,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.proyectopoli.R
 import com.example.proyectopoli.navigation.ContentNavigation
 import com.example.proyectopoli.screens.fragments.content.menu.MenuFragment
 import kotlinx.coroutines.launch
@@ -83,8 +97,34 @@ fun HomeScreen() {
                     .fillMaxSize()
                     .padding(paddingValues),
                 color = MaterialTheme.colorScheme.background
+            ) {  Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp) // espacio interno
             ) {
-                ContentNavigation()
+                Text(
+                    text = "Bienvenido a la app de tareas",
+                    style = TextStyle(
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF1d1e1f),
+                        letterSpacing = 1.2.sp
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(100.dp)) // espacio entre texto e imagen
+
+                Image(
+                    painter = painterResource(id = R.drawable.imagen_home_screen), // tu imagen aquí
+                    contentDescription = "Logo de la app",
+                    modifier = Modifier
+                        .size(400.dp) // Tamaño grande, puedes ajustar a lo que gustes
+                        .padding(2.dp),
+
+                    contentScale = ContentScale.Fit
+                )
+            }
+
             }
         }
     }

@@ -36,6 +36,7 @@ import com.example.proyectopoli.screens.fragments.content.PerfilFragment
 import com.example.proyectopoli.screens.fragments.content.VideosFragment
 import com.example.proyectopoli.screens.fragments.content.WebFragment
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContentNavigation() { // Estado para controlar el contenido seleccionado
@@ -44,9 +45,10 @@ fun ContentNavigation() { // Estado para controlar el contenido seleccionado
     PermanentNavigationDrawer(
         drawerContent = {
             PermanentDrawerSheet(
-
+                drawerContainerColor = Color(0xFFe8f7fb),
                 modifier = Modifier
                     .width(150.dp)
+
             ) {
                 DrawerMenuItem(label = "Perfil") { contenido = "Perfil" }
                 DrawerMenuItem(label = "Fotos") { contenido = "Fotos" }
