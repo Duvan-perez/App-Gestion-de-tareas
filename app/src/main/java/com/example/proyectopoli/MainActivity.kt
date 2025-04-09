@@ -7,19 +7,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.proyectopoli.screens.HomeScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.proyectopoli.navigation.AppNavigation
 import com.example.proyectopoli.ui.theme.ProyectoPOLITheme
-import com.example.proyectopoli.navigation.ContentNavigation
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ProyectoPOLITheme {
-                HomeScreen()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val navController = rememberNavController()
+                    AppNavigation(navController = navController)
 
-            }
+                }
             }
         }
     }
+}

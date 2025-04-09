@@ -1,64 +1,42 @@
 package com.example.proyectopoli.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberDrawerState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.proyectopoli.R
-import com.example.proyectopoli.navigation.ContentNavigation
+import com.example.proyectopoli.navigation.AppNavigation
 import com.example.proyectopoli.screens.fragments.content.menu.MenuFragment
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    var selectedOption by remember { mutableStateOf("perfil") }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
                 MenuFragment(
-                    selectedOption = selectedOption,
                     onOptionSelected = { option ->
-                        selectedOption = option
                         scope.launch {
                             drawerState.close()
+                            navController.navigate(option)
                         }
                     }
                 )
@@ -68,20 +46,24 @@ fun HomeScreen() {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("ProyectoPOLI") },
+                    title = {
+                        Text(
+                            text = "ProyectoPOLI",
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                fontWeight = FontWeight.Bold
+                            )
+                        )
+                    },
                     navigationIcon = {
                         IconButton(onClick = {
                             scope.launch {
-                                if (drawerState.isClosed) {
-                                    drawerState.open()
-                                } else {
-                                    drawerState.close()
-                                }
+                                if (drawerState.isClosed) drawerState.open()
+                                else drawerState.close()
                             }
                         }) {
                             Icon(
                                 imageVector = Icons.Default.Menu,
-                                contentDescription = "Menu"
+                                contentDescription = "Menú"
                             )
                         }
                     },
@@ -96,35 +78,42 @@ fun HomeScreen() {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues),
-                color = MaterialTheme.colorScheme.background
-            ) {  Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp) // espacio interno
+                color = Color(0xFF95CBD9)
             ) {
-                Text(
-                    text = "Bienvenido a la app de tareas",
-                    style = TextStyle(
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF1d1e1f),
-                        letterSpacing = 1.2.sp
-                    )
-                )
-
-                Spacer(modifier = Modifier.height(100.dp)) // espacio entre texto e imagen
-
-                Image(
-                    painter = painterResource(id = R.drawable.imagen_home_screen), // tu imagen aquí
-                    contentDescription = "Logo de la app",
+                Column(
                     modifier = Modifier
-                        .size(400.dp) // Tamaño grande, puedes ajustar a lo que gustes
-                        .padding(2.dp),
+                        .fillMaxSize()
+                        .padding(24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Top
+                ) {
+                    Text(
+                        text = "Bienvenido a la app de tareas",
+                        style = MaterialTheme.typography.headlineSmall.copy(
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    )
 
-                    contentScale = ContentScale.Fit
-                )
-            }
+                    Spacer(modifier = Modifier.height(32.dp))
 
+                    Card(
+                        shape = RoundedCornerShape(20.dp),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant
+                        )
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.imagen_home_screen),
+                            contentDescription = "Logo de la app",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(400.dp)
+                                .clip(RoundedCornerShape(30.dp))
+                        )
+                    }
+                }
             }
         }
     }
