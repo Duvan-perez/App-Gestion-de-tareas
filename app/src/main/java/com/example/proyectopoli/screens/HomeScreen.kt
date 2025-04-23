@@ -10,7 +10,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -18,9 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.proyectopoli.R
-import com.example.proyectopoli.navigation.AppNavigation
 import com.example.proyectopoli.screens.fragments.content.menu.MenuFragment
 import kotlinx.coroutines.launch
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -88,10 +91,20 @@ fun HomeScreen(navController: NavHostController) {
                     verticalArrangement = Arrangement.Top
                 ) {
                     Text(
-                        text = "Bienvenido a la app de tareas",
+                        text = "Bienvenido a",
                         style = MaterialTheme.typography.headlineSmall.copy(
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary
+                            fontSize = 40.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "TaskFlow",
+                        style = MaterialTheme.typography.headlineMedium.copy(
+                            fontSize = 45.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     )
 
@@ -113,6 +126,14 @@ fun HomeScreen(navController: NavHostController) {
                                 .clip(RoundedCornerShape(30.dp))
                         )
                     }
+                    Text(
+                        text = "App de tareas",
+                        style = MaterialTheme.typography.headlineSmall.copy(
+                            fontSize = 30.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                    )
                 }
             }
         }
