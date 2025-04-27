@@ -20,7 +20,7 @@ fun AppNavigation(navController: NavHostController) {
         composable("home") { HomeScreen(navController) }
         composable("perfil") { PerfilFragment(navController) }
         composable("fotos") { FotosFragment(navController) }
-        composable("videos") { VideosFragment() }
+        composable("videos") { VideosFragment(navController) }
         composable("web") { WebFragment() }
         composable("botones") { BotonesFragment() }
     }
