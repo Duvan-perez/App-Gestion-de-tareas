@@ -122,7 +122,7 @@ fun HomeScreen(navController: NavHostController) {
                             contentDescription = "Logo de la app",
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
-                                .size(400.dp)
+                                     .size(400.dp)
                                 .clip(RoundedCornerShape(30.dp))
                         )
                     }
