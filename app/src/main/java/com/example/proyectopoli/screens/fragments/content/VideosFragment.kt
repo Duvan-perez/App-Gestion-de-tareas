@@ -36,7 +36,6 @@ import kotlinx.coroutines.launch
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
-import com.google.accompanist.pager.*
 import com.example.proyectopoli.R
 
 @OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
